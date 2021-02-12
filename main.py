@@ -5,7 +5,7 @@ import time
 
 class CustomClient(discord.Client):
     async def on_ready(self):
-        channel = self.get_channel(806802497226145802)
+        channel = self.get_channel(809822474668736583)
         await channel.send("Hey @everyone its time to pray")
         exit(0)
 
