@@ -7,6 +7,7 @@ class CustomClient(discord.Client):
     async def on_ready(self):
         channel = self.get_channel(806802497226145802)
         await channel.send("Hey @everyone its time to pray")
+        exit(0)
 
 
 if __name__ == "__main__":
