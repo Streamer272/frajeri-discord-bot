@@ -1,5 +1,6 @@
 from datetime import datetime, date
 from time import sleep
+from threading import Thread
 import discord
 
 last_send_date = ""
@@ -19,12 +20,11 @@ def send():
 if __name__ == "__main__":
     print("Bot running...")
     while True:
-        while True:
-            time_ = int(str(datetime.now().strftime("%H:%M:%S")).replace(":", ""))
+        time_ = int(str(datetime.now().strftime("%H:%M:%S")).replace(":", ""))
 
-            if time_ > 135500 and last_send_date != str(date.today()):
-                last_send_date = str(date.today())
-                break
+        if time_ > 135500 and last_send_date != str(date.today()):
+            last_send_date = str(date.today())
+            Thread(target=send).start()
 
-            sleep(60)
-        send()
+        del time_
+        sleep(60)
