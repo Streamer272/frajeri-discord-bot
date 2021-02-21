@@ -1,6 +1,5 @@
 from datetime import datetime, date
 from time import sleep
-from threading import Thread
 import discord
 
 last_send_date = ""
@@ -24,7 +23,7 @@ if __name__ == "__main__":
 
         if time_ > 135500 and last_send_date != str(date.today()):
             last_send_date = str(date.today())
-            Thread(target=send).start()
+            send()
 
         del time_
         sleep(60)
