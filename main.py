@@ -1,8 +1,17 @@
 from datetime import datetime, date
 from time import sleep
+from sys import argv
 import discord
 
-last_send_date = ""
+today = str(date.today())
+
+try:
+    if argv[1].split("--start-today=")[1] in ("true", "True", "t"):
+       today = ""
+except:
+    pass
+
+last_send_date = today
 
 class CustomClient(discord.Client):
     async def on_ready(self):
