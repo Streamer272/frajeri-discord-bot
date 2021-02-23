@@ -7,7 +7,7 @@ class CustomClient(discord.Client):
     async def on_ready(self):
         await self.wait_until_ready()
 
-        channel = self.get_channel(806802320565993544)
+        channel = self.get_channel(809822474668736583)
         sleep(1)
 
         await channel.send("Hey @everyone, you should go and pray in 5 minues...")

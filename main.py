@@ -3,12 +3,13 @@ from time import sleep
 from threading import Thread
 from os import system, chdir
 
-last_send_date = ""
+
+last_send_date = str(date.today())
 
 
 def send():
     chdir("\\".join(__file__.split("\\")[0:-1]))
-    send_thread = Thread(target=system, args=["python send.py"])
+    send_thread = Thread(target=system, args=["python3 send.py"])
     send_thread.daemon = True
     send_thread.start()
 
