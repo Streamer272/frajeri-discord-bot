@@ -18,4 +18,3 @@ class CustomClient(discord.Client):
 if __name__ == "__main__":
     client = CustomClient()
     client.run("ODA5ODE2OTcxNTMyODI4Nzgy.YCam0w.cYBBRIwM2ZWnuEOoJrCfLj6nWaA")
-    print("Pray message send...")
