@@ -59,7 +59,7 @@ class CustomClient(discord.Client):
                     print("Sending message...")
                     last_send_date = str(date.today())
 
-                    await channel.send("Hey @everyone, you should go and pray in 5 minutes...")
+                    await channel.send("Hey @everyone, you should go pray in 5 minutes...")
                     write_log("Pray message sent...")
 
             except Exception as err:
