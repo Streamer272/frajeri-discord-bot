@@ -5,11 +5,8 @@ discord bot
 from datetime import datetime, date
 from asyncio import sleep
 from typing import List
+from json import loads
 import discord
-
-
-last_send_date = str(date.today())
-pray_time = 135500
 
 
 def write_log(message: str) -> None:
@@ -20,6 +17,15 @@ def write_log(message: str) -> None:
 
     file = open("log-" + str(date.today()) + ".txt", "a")
     file.write(str(datetime.now().strftime("%H:%M:%S")) + ": " + str(message) + "\n")
+
+
+class BotNotRunningException(Exception):
+    """
+    error that occurs when bot is not running
+    """
+
+    def __init__(self):
+        super().__init__("Bot is not running...")
 
 
 class CustomClient(discord.Client):
@@ -40,16 +46,24 @@ class CustomClient(discord.Client):
 
         await sleep(1)
 
+        print("Bot running...")
+
         while True:
             try:
+                if open("run", "r").read() != "true":
+                    raise BotNotRunningException
+
                 time_ = int(str(datetime.now().strftime("%H:%M:%S")).replace(":", ""))
 
                 if time_ > pray_time and last_send_date != str(date.today()):
                     print("Sending message...")
                     last_send_date = str(date.today())
 
-                    await channel.send("Hey @everyone, you should go pray in 5 minutes...")
+                    await channel.send(loads(open("bot_config.json", "r").read())["pray_message"])
                     write_log("Pray message sent...")
+
+            except BotNotRunningException:
+                pass
 
             except Exception as err:
                 print("Error occurred...")
@@ -65,6 +79,13 @@ def run(argv: List[str]):
     """
 
     global last_send_date, pray_time
+
+    last_send_date = str(date.today())
+    pray_time = loads(open("bot_config.json", "r").read())["pray_time"]
+
+    run_file = open("run", "w")
+    run_file.write("true")
+    run_file.close()
 
     for i in range(len(argv)):
         if "--set-starttoday" in argv[i]:
