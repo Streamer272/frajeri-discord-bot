@@ -1,6 +1,9 @@
+const backendUrl = "http://localhost:80/";
+
+
 function loadDiode() {
     const xml = new XMLHttpRequest();
-    xml.open("GET", "http://localhost:80/is_bot_running");
+    xml.open("GET", backendUrl + "is_bot_running");
     let gotResponse = false;
 
     xml.onreadystatechange = () => {
