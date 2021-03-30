@@ -5,18 +5,11 @@ discord bot
 from datetime import datetime, date
 from asyncio import sleep
 from typing import List
-from json import loads
+
+from Console import Console
+from RunController import RunController
+
 import discord
-
-
-def write_log(message: str) -> None:
-    """
-    writes message in to log.txt
-    :param message: message you want to write
-    """
-
-    file = open("log-" + str(date.today()) + ".txt", "a")
-    file.write(str(datetime.now().strftime("%H:%M:%S")) + ": " + str(message) + "\n")
 
 
 class BotNotRunningException(Exception):
@@ -46,7 +39,7 @@ class CustomClient(discord.Client):
 
         await sleep(1)
 
-        print("Bot running...")
+        Console.print_message("Bot running...")
 
         while True:
             try:
@@ -56,18 +49,18 @@ class CustomClient(discord.Client):
                 time_ = int(str(datetime.now().strftime("%H:%M:%S")).replace(":", ""))
 
                 if time_ > pray_time and last_send_date != str(date.today()):
-                    print("Sending message...")
+                    Console.print_message("Sending message...")
                     last_send_date = str(date.today())
 
-                    await channel.send(loads(open("bot_config.json", "r").read())["pray_message"])
-                    write_log("Pray message sent...")
+                    await channel.send(RunController.get_config_setting("pray_message"))
+                    Console.write_log("Pray message sent...")
 
             except BotNotRunningException:
                 pass
 
             except Exception as err:
-                print("Error occurred...")
-                write_log("Error: " + str(err))
+                Console.print_error("Error occurred...")
+                Console.write_log("Error: " + str(err))
 
             await sleep(60)
 
@@ -81,7 +74,7 @@ def run(argv: List[str]):
     global last_send_date, pray_time
 
     last_send_date = str(date.today())
-    pray_time = loads(open("bot_config.json", "r").read())["pray_time"]
+    pray_time = RunController.get_config_setting("pray_time")
 
     run_file = open("run", "w")
     run_file.write("true")

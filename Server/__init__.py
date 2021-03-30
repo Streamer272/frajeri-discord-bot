@@ -3,6 +3,7 @@ flask server for discord bot
 """
 
 from flask import Flask, render_template, make_response  # , request
+from json import loads
 # from json import loads, dumps
 
 
@@ -28,9 +29,10 @@ def run():
 
         try:
             return make_response(
-                open("run", "r").read(),
+                str(loads(open("run.json", "r").read())["active"]).lower(),
                 200
             )
+
         except FileNotFoundError:
             return make_response(
                 "false",
