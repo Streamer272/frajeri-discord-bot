@@ -21,6 +21,7 @@ function loadDiode() {
 }
 
 window.onload = () => {
+    setTimeout(loadDiode, 0);
     const loadingDiodeIntervalId = setInterval(() => {
         loadDiode();
     }, 5000);
