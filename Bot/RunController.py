@@ -4,6 +4,7 @@ controls run file and run setting
 
 from typing import Optional
 from os import remove
+from datetime import date
 from json import loads, dumps
 
 
@@ -23,29 +24,17 @@ class RunController:
         config = loads(open("config.json", "r").read())
         return config.get(setting)
 
-    # @staticmethod
-    # def set_config_setting(setting: str, value: str) -> None:
-    #     """
-    #     sets setting to value
-    #     :param value: value you want to set setting
-    #     :param setting: setting you want value to set on
-    #     """
-    #
-    #     config = loads(open("config.json", "r").read())
-    #     config[setting] = value
-    #
-    #     with open("config.json", "w") as file:
-    #         file.write(config)
-
     @staticmethod
-    def init_run_file() -> None:
+    def init_run_file(start_today: bool = False) -> None:
         """
         creates run file
         """
 
         with open("run.json", "w") as file:
             file.write(dumps({
-                "active": True
+                "active": True,
+                "last_send_date": str(date.today) if start_today else "",
+                "pray_time": RunController.get_config_setting("pray_time")
             }))
 
     @staticmethod
