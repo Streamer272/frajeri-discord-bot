@@ -33,7 +33,7 @@ class RunController:
         with open("run.json", "w") as file:
             file.write(dumps({
                 "active": True,
-                "last_send_date": str(date.today) if start_today else "",
+                "last_send_date": "" if start_today else str(date.today()),
                 "pray_time": RunController.get_config_setting("pray_time")
             }))
 
@@ -60,7 +60,7 @@ class RunController:
         config[setting] = value
 
         with open("run.json", "w") as file:
-            file.write(config)
+            file.write(dumps(config))
 
     @staticmethod
     def delete_run_file() -> None:

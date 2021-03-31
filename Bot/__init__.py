@@ -74,7 +74,7 @@ def run(argv: List[str]):
 
     for i in range(len(argv)):
         if "--Sst" in argv[i]:
-            start_today = argv[i + 1] in ("true", "t", "yes", "y", "1")
+            start_today = argv[i + 1].lower() in ("true", "t", "yes", "y", "1")
 
     RunController.init_run_file(start_today)
 
