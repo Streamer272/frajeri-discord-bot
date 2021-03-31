@@ -11,7 +11,8 @@ def run():
     """
     starts flask server
     """
-    app = Flask(__name__, template_folder="static")
+
+    app = Flask(__name__, template_folder="static/public")
 
     @app.route("/", methods=["GET"])
     def mapping_():
@@ -19,7 +20,7 @@ def run():
         mapping for main page
         """
 
-        return render_template(["index.html"])
+        return render_template("index.html")
 
     @app.route("/is_bot_running", methods=["GET"])
     def mapping_is_bot_running():

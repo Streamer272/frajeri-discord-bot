@@ -2,6 +2,8 @@
 .vs
 .idea
 
+static/node_modules
+
 __pycache__
 */__pycache__
 

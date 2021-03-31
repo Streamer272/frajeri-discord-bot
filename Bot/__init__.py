@@ -6,8 +6,8 @@ from datetime import datetime, date
 from asyncio import sleep
 from typing import List
 
-from Console import Console
-from RunController import RunController
+from Bot.Console import Console
+from Bot.RunController import RunController
 
 import discord
 
@@ -41,7 +41,7 @@ class CustomClient(discord.Client):
 
         while True:
             try:
-                if open("run", "r").read() != "true":
+                if not RunController.get_run_setting("active"):
                     raise BotNotRunningException
 
                 time_ = int(str(datetime.now().strftime("%H:%M:%S")).replace(":", ""))
