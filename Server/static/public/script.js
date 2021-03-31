@@ -7,13 +7,24 @@ function loadBotStatus() {
     let gotResponse = false;
 
     xml.onreadystatechange = () => {
-        if (!gotResponse) {
-            document.getElementById("bot-active-diode").style.backgroundColor = xml.responseText === "true" ? "green" : "red";
-            document.getElementById("bot-active-diode-text").innerHTML = xml.responseText === "true" ? "Running..." : "Paused...";
+        if (!gotResponse && xml.responseText) {
+            const botActiveDiode = document.getElementById("bot-active-diode")
+            const botActiveDiodeText = document.getElementById("bot-active-diode-text")
 
-            if (xml.responseText) {
-                gotResponse = true;
+            if (xml.responseText === "true") {
+                botActiveDiode.classList.remove("bg-red-600");
+                botActiveDiode.classList.add("bg-green-600");
+
+                botActiveDiodeText.innerHTML = "Running...";
             }
+            else {
+                botActiveDiode.classList.remove("bg-green-600");
+                botActiveDiode.classList.add("bg-red-600");
+
+                botActiveDiodeText.innerHTML = "Paused...";
+            }
+
+            gotResponse = true;
         }
     }
 
@@ -21,5 +32,5 @@ function loadBotStatus() {
 }
 
 window.onload = () => {
-    // setTimeout(loadBotStatus, 0);
+    setTimeout(loadBotStatus, 0);
 }
