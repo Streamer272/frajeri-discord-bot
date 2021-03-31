@@ -21,5 +21,5 @@ function loadBotStatus() {
 }
 
 window.onload = () => {
-    setTimeout(loadBotStatus, 0);
+    // setTimeout(loadBotStatus, 0);
 }
