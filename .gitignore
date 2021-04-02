@@ -7,5 +7,6 @@ static/node_modules
 __pycache__
 */__pycache__
 
-run.json
-log*.txt
+src/test.py
+src/run.json
+src/log
