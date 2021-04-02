@@ -1,5 +1,7 @@
 /* ./your-css-folder/styles.css */
 
+/*noinspection ALL*/
+
 /* ! tailwindcss v2.0.4 | MIT License | https://tailwindcss.com */
 
 /*! modern-normalize v1.0.0 | MIT License | https://github.com/sindresorhus/modern-normalize */
@@ -553,6 +555,8 @@ video {
   height: auto;
 }
 
+/*noinspection ALL*/
+
 .container {
   width: 100%;
 }
@@ -586,6 +590,8 @@ video {
     max-width: 1536px;
   }
 }
+
+/*noinspection ALL*/
 
 .space-y-0 > :not([hidden]) ~ :not([hidden]) {
   --tw-space-y-reverse: 0;
