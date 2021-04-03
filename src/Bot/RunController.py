@@ -3,7 +3,7 @@ controls run file and run setting
 """
 
 from typing import Optional
-from os import remove, mkdir, path
+from os import mkdir, path
 from json import loads, dumps
 from datetime import datetime, date
 

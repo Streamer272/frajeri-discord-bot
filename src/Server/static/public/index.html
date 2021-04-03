@@ -12,11 +12,18 @@
 
         <title>Discord Bot Controller</title>
     </head>
-    <body class="bg-yellow-50">
-        <div class="container bg-blue-200 border-black border-opacity-75 border-solid border rounded w-72 h-44 m-2 inline-block content-center items-center">
-            <p class="inline-block text-black text-xl font-bold w-44 h-8 mx-14">Discord Bot Status</p>
-            <div class="rounded-full w-32 h-32 bg-red-600 mx-20" id="bot-active-diode">
-                <p class="inline-block text-black text-lg font-bold w-24 h-6 mt-12 mx-6" id="bot-active-diode-text">Paused...</p>
+    <body class="bg-gray-100">
+        <div class="flex flex-wrap">
+            <div class="bg-white rounded w-64 h-48 m-2 inline-block shadow-lg p-2 flex-initial">
+                <p class="inline-block text-black text-xl font-bold w-44 h-8 mx-8">Discord Bot Status</p>
+                <div class="rounded-full w-32 h-32 bg-red-600 mx-14" id="bot-active-diode">
+                    <p class="inline-block text-black text-lg font-bold w-24 h-6 mt-12 mx-6" id="bot-active-diode-text">Paused...</p>
+                </div>
+            </div>
+
+            <div class="bg-white rounded w-52 h-48 m-2 inline-block shadow-lg p-2 flex-initial">
+                <p class="inline-block text-black text-xl font-bold w-32 h-8 mx-8">Toggle Status</p>
+                <button class="bg-red-400 hover:bg-red-600 w-36 h-28 rounded-xl mx-6 my-4">Toggle</button>
             </div>
         </div>
     </body>

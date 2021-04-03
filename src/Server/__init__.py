@@ -20,7 +20,7 @@ def run():
         mapping for main page
         """
 
-        return render_template("src/Server/static/public/index.html")
+        return render_template("index.html")
 
     @app.route("/is_bot_running", methods=["GET"])
     def mapping_is_bot_running():
