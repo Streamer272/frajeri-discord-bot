@@ -14,7 +14,7 @@ class RunController:
     """
 
     @staticmethod
-    def get_configuration(setting: str) -> Optional[str]:
+    def get_configuration(setting: str) -> any:
         """
         returns configuration for requested setting
         :param setting: setting you want configuration for

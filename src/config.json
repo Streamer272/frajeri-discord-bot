@@ -10,5 +10,9 @@
             "pray_time": 195500,
             "pray_message": "Čaute @everyone, mali by ste si dať večernú modlidbu..."
         }
-    ]
+    ],
+    "run": {
+        "server": false,
+        "bot": true
+    }
 }
