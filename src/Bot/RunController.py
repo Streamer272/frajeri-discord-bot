@@ -31,13 +31,17 @@ class RunController:
         """
 
         with open("run.json", "w") as file:
-            file.write(dumps({
-                "active": True,
-                "last_send_date": "" if start_today else str(date.today())
-            }))
+            run_data = {
+                "active": True
+            }
+
+            for server in RunController.get_configuration("servers"):
+                run_data[server["name"]] = "" if start_today else str(date.today())
+
+            file.write(dumps(run_data))
 
     @staticmethod
-    def get_run_setting(setting: str) -> Optional[str]:
+    def get_run_setting(setting: str) -> any:
         """
         returns value for requested setting
         :param setting: setting you want value for

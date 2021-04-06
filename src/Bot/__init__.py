@@ -55,14 +55,16 @@ class CustomClient(discord.Client):
                         channel = self.get_channel(server["id"])
 
                         time_ = int(str(datetime.now().strftime("%H:%M:%S")).replace(":", ""))
+                        last_send_date = RunController.get_run_setting("last_send_date")
 
-                        if time_ > server["pray_time"] and RunController.get_run_setting("last_send_date") != str(
+                        if time_ > server["pray_time"] and (last_send_date.get(server["name"])) != str(
                                 date.today()):
-                            Console.print_message("Sending message...")
-                            RunController.set_run_setting("last_send_date", str(date.today()))
+                            Console.print_message("Sending message to server " + server["name"] + "...")
+                            last_send_date[server["name"]] = str(date.today())
+                            RunController.set_run_setting("last_send_date", last_send_date)
 
                             await channel.send(server["pray_message"])
-                            RunController.add_log("Pray message sent...")
+                            RunController.add_log("Pray message sent to server " + server["name"] + "...")
 
                 except Exception as err:
                     raise ConfigError(err)
@@ -77,16 +79,6 @@ class CustomClient(discord.Client):
             await sleep(60)
 
 
-def to_bool(string: str) -> bool:
-    """
-    returns bool out of string
-    :param string: string you want to get bool from
-    :return: bool type of string
-    """
-
-    return string.lower() in ("true", "t", "yes", "y", "1", "")
-
-
 def run(argv: List[str]) -> None:
     """
     runs discord bot
@@ -97,12 +89,12 @@ def run(argv: List[str]) -> None:
 
     for i in range(len(argv)):
         if "--Sst" == argv[i]:
-            start_today = to_bool(argv[i + 1])
+            start_today = argv[i + 1].lower() in ("true", "t", "yes", "y", "1", "")
 
     RunController.init_run_file(start_today)
 
     client = CustomClient()
-    client.run("ODA5ODE2OTcxNTMyODI4Nzgy.YCam0w.cYBBRIwM2ZWnuEOoJrCfLj6nWaA")
+    client.run(RunController.get_configuration("token"))
 
 
 if __name__ == "__main__":
