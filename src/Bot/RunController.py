@@ -2,7 +2,7 @@
 controls run file and run setting
 """
 
-from os import mkdir, path
+from os import mkdir, path, listdir
 from json import loads, dumps, decoder
 from datetime import datetime, date
 from time import sleep
@@ -30,7 +30,7 @@ class RunController:
         :return: configuration for setting
         """
 
-        config = loads(open("config.json", "r").read())
+        config = loads(open("src/config.json", "r").read())
         return config.get(setting)
 
     @staticmethod
@@ -42,7 +42,7 @@ class RunController:
         sleep(1)
 
         try:
-            config = loads(open("config.json", "r").read())
+            config = loads(open("src/config.json", "r").read())
 
         except decoder.JSONDecodeError:
             raise ConfigurationException("JSON can't decode config.json")
@@ -70,7 +70,7 @@ class RunController:
         creates run file
         """
 
-        with open("run.json", "w") as file:
+        with open("src/run.json", "w") as file:
             run_data = {
                 "active": True
             }
@@ -90,7 +90,7 @@ class RunController:
         :return: value for setting
         """
 
-        config = loads(open("run.json", "r").read())
+        config = loads(open("src/run.json", "r").read())
         return config.get(setting)
 
     @staticmethod
@@ -101,10 +101,10 @@ class RunController:
         :param setting: setting you want value to set on
         """
 
-        config = loads(open("run.json", "r").read())
+        config = loads(open("src/run.json", "r").read())
         config[setting] = value
 
-        with open("run.json", "w") as file:
+        with open("src/run.json", "w") as file:
             file.write(dumps(config))
 
     @staticmethod

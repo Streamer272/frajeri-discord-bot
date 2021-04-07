@@ -7,8 +7,8 @@ from asyncio import sleep
 from colorama import Fore, Style
 from typing import List, Optional
 
-from src.Bot.Console import Console
-from src.Bot.RunController import RunController
+from Bot.Console import Console
+from Bot.RunController import RunController
 
 import discord
 
@@ -59,8 +59,6 @@ class CustomClient(discord.Client):
 
                         time_ = int(str(datetime.now().strftime("%H:%M:%S")).replace(":", ""))
                         last_send_date = RunController.get_run_setting("last_send_date")
-
-                        print(time_)
 
                         if time_ > server["pray_time"] and (last_send_date.get(server["name"])) != str(
                                 date.today()):
