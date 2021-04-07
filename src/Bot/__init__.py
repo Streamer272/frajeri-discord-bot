@@ -4,6 +4,7 @@ discord bot
 
 from datetime import datetime, date
 from asyncio import sleep
+from colorama import Fore, Style
 from typing import List, Optional
 
 from src.Bot.Console import Console
@@ -43,6 +44,9 @@ class CustomClient(discord.Client):
         await self.wait_until_ready()
 
         Console.print_message("Bot running...")
+
+        # rework this:
+        # its really ugly code and bad performance
 
         while True:
             try:
@@ -84,6 +88,10 @@ def run(argv: List[str]) -> None:
     runs discord bot
     :param argv: args inserted in console
     """
+
+    Console.print_message("Running configuration safe check...")
+    RunController.run_configuration_safe_check()
+    Console.print_message(f"Configuration safe check: {Fore.RED}OK{Style.RESET_ALL}")
 
     start_today = False
 
