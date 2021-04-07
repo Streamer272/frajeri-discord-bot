@@ -2,9 +2,8 @@
 flask server for discord bot
 """
 
-from flask import Flask, render_template, make_response  # , request
+from flask import Flask, render_template, make_response
 from json import loads
-# from json import loads, dumps
 
 
 def run():

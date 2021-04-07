@@ -45,8 +45,7 @@ class CustomClient(discord.Client):
 
         Console.print_message("Bot running...")
 
-        # rework this:
-        # its really ugly code and bad performance
+        # TODO: rework this loop cuz its thrash:
 
         while True:
             try:

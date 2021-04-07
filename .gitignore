@@ -3,7 +3,7 @@
 /.idea
 
 /src/Server/static/node_modules/
-/src/Server/static/node_modules/*
+/venv
 
 /__pycache__
 /**/__pycache__
