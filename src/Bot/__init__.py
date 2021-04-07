@@ -60,6 +60,8 @@ class CustomClient(discord.Client):
                         time_ = int(str(datetime.now().strftime("%H:%M:%S")).replace(":", ""))
                         last_send_date = RunController.get_run_setting("last_send_date")
 
+                        print(time_)
+
                         if time_ > server["pray_time"] and (last_send_date.get(server["name"])) != str(
                                 date.today()):
                             Console.print_message("Sending message to server " + server["name"] + "...")

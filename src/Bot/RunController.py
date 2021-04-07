@@ -75,9 +75,11 @@ class RunController:
                 "active": True
             }
 
+            last_send_date = {}
             for server in RunController.get_configuration("servers"):
-                run_data[server["name"]] = "" if start_today else str(date.today())
+                last_send_date[server["name"]] = "" if start_today else str(date.today())
 
+            run_data["last_send_date"] = last_send_date
             file.write(dumps(run_data))
 
     @staticmethod
