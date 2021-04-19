@@ -2,9 +2,10 @@
 controls run file and run setting
 """
 
-from os import mkdir, path, listdir
+from os import mkdir, path
 from json import loads, dumps, decoder
 from datetime import datetime, date
+from subprocess import check_output
 from time import sleep
 
 
@@ -64,6 +65,19 @@ class RunController:
                     raise ConfigurationException(f"Wrong server configuration in \"{str(server)}\", type of \"{need}\" "
                                                  f"should be \"{str(need_type)}\"")
 
+        if RunController.get_configuration("run").get("temp"):
+            temp = RunController.get_configuration("run").get("temp")
+
+            needed = ["temp_level", "channel", "message"]
+            needed_type = [int, int, str]
+
+            for i in range(len(needed)):
+                if not temp.get(needed[i]):
+                    raise ConfigurationException(f"Missing temp configuration ({needed[i]}) in run/temp")
+
+                if type(temp.get(needed[i])) != needed_type[i]:
+                    raise ConfigurationException(f"Wrong temp configuration ({needed[i]}) in run/temp")
+
     @staticmethod
     def init_run_file(start_today: bool = False) -> None:
         """
@@ -119,3 +133,16 @@ class RunController:
 
         with open("log/log-" + str(date.today()) + ".txt", "a") as file:
             file.write(str(datetime.now().strftime("%H:%M:%S")) + ": " + str(message) + "\n")
+
+    # noinspection PyTypeChecker
+    @staticmethod
+    def get_temp() -> int:
+        """
+        works only on raspberry pi
+        """
+
+        data = check_output("vcgencmd measure_temp")
+        data = data.replace("temp=", "")
+        data = data.replace("'C", "")
+
+        return int(data)

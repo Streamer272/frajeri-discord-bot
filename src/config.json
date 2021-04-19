@@ -16,6 +16,12 @@
     ],
     "run": {
         "server": false,
-        "bot": true
+        "bot": true,
+
+        "temp": {
+            "temp_level": 50,
+            "channel": 806802424861818880,
+            "message": "The temperature has reached <temp>!"
+        }
     }
 }

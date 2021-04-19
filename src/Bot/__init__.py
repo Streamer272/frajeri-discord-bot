@@ -36,6 +36,8 @@ class CustomClient(discord.Client):
     custom client for discord bot
     """
 
+    # TODO: add temp measuring
+
     async def on_ready(self):
         """
         runs when bot is ready
@@ -51,6 +53,13 @@ class CustomClient(discord.Client):
             try:
                 if not RunController.get_run_setting("active"):
                     raise BotNotRunningError
+
+                temp_config = RunController.get_configuration("run").get("temp_config")
+                if temp_config:
+                    if RunController.get_temp() > temp_config.get("temp_level"):
+                        channel = self.get_channel(temp_config.get("channel"))
+
+                        await channel.send(temp_config.get("message").replace("<temp>", RunController.get_temp()))
 
                 try:
                     server: Optional[dict]
